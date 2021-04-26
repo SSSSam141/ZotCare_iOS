@@ -1,2 +1,2 @@
-##ZotCare iOS version
+ZotCare iOS version
 
