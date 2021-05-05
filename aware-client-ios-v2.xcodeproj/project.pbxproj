@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		226D0E342642C350001B8733 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D0E332642C350001B8733 /* UserInfo.swift */; };
 		22826FF82626C97500033190 /* YSharApI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22826FF72626C97500033190 /* YSharApI.swift */; };
 		22FCB654263035AD0065CC69 /* LoginDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCB653263035AD0065CC69 /* LoginDesign.swift */; };
 		22FCB659263054020065CC69 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCB658263054020065CC69 /* Register.swift */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		0E005CD3977E2B77C564B627 /* Pods_aware_client_ios_v2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_aware_client_ios_v2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		226D0E332642C350001B8733 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		22826FF72626C97500033190 /* YSharApI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YSharApI.swift; sourceTree = "<group>"; };
 		22FCB64F26302D540065CC69 /* Login.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Login.xib; path = "/Users/sam/Desktop/UCI/app/iOSapp/aware-client-ios-v2-master/aware-client-ios-v2/Login.xib"; sourceTree = "<absolute>"; };
 		22FCB653263035AD0065CC69 /* LoginDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDesign.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				22FCB653263035AD0065CC69 /* LoginDesign.swift */,
 				22FCB658263054020065CC69 /* Register.swift */,
 				22FCB65D2630641B0065CC69 /* LoginController.swift */,
+				226D0E332642C350001B8733 /* UserInfo.swift */,
 			);
 			path = "aware-client-ios-v2";
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				4F1B11B122286E75006F3176 /* DeviceUsageCard.swift in Sources */,
 				4FEA0298237B8D1700CFDC2F /* OnboardingManager.swift in Sources */,
 				4FFE19B02226C7DC00C4715E /* ESMViewController.swift in Sources */,
+				226D0E342642C350001B8733 /* UserInfo.swift in Sources */,
 				4FFE19772226A10B00C4715E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

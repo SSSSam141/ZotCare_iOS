@@ -383,6 +383,8 @@ extension SensorSettingViewController: UITableViewDataSource{
                 alert.addAction(UIAlertAction(title: item, style: .default, handler: { (action) in
                     if action.title == "true" {
                         AWAREStudy.shared().setSetting(content.key, value: true as NSObject)
+                        
+                        
                     }else{
                         AWAREStudy.shared().setSetting(content.key, value: false as NSObject)
                     }

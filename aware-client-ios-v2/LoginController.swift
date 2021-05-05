@@ -45,6 +45,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
                // 解析数据
                 let jsonDic = try! response.mapJSON()
                 print(jsonDic)
+               
+          
                 if response.statusCode==409 {
                     let  alertController =  UIAlertController (title:  "Warning" ,
                                             message:  "This account has been registered before!" , preferredStyle: .alert)
@@ -86,7 +88,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
                     // 解析数据
                      let jsonDic = try! response.mapJSON()
                      print(jsonDic)
+                    let Data = JSON(jsonDic)
                   
+                    let token = Data["authentication_token"]
+                    let id = Data["id"]
+                    
+                    let user = UserDefaults.standard
+                   
+                    user.set(id.string, forKey: "id")
+                    user.set(token.string, forKey: "token")
+                    
+                    
                     if response.statusCode == 404{
                         let  alertController =  UIAlertController (title:  "Warning" ,
                                                 message:  "This account does not exist, please register it berfore login!" , preferredStyle: .alert)

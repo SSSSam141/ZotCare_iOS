@@ -31,23 +31,77 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        let user = UserDefaults.standard
         
-        AwareDataProvider.request(.data){result in
-            if case let .success(response)=result{
-                let d = try? response.mapJSON()
-                print(d)
-                let json = JSON(d!)
+        let user_id = user.string(forKey: "id")
+
+        let user_token = user.string(forKey: "token")
+        
+//        for sensor in self.sensors{
+//            let data_title = sensor.identifier
+//            let data_detail = JSON(sensorManager.getLatestSensorData(sensor.identifier))
+//            print(data_title)
+//            print(data_detail)
+//        //print(sensor)
+//
+////            AwareDataProvider.request(.data(id:user_id!,token: user_token!, title: data_title, data: data_details)){ result in
+////                     if case .success(let response) = result {
+////                        // 解析数据
+////                         let jsonDic = try! response.mapJSON()
+////                         print(jsonDic)
+////
+////                 }
+////
+////            }
+//        }
+        
+        
+    }
+    func SensordataUpload(){
+        let study = AWAREStudy.shared()
+        let manager = AWARESensorManager.shared()
+        
+        manager.stopAndRemoveAllSensors()
+        if study.getURL() == "" {
+            manager.addSensors(with: study)
+            manager.add(AWAREEventLogger.shared())
+            manager.add(AWAREStatusMonitor.shared())
+            manager.createDBTablesOnAwareServer()
+            manager.startAllSensors()
+            let alert = UIAlertController(title: NSLocalizedString("setting_view_config_refresh_title", comment: ""),
+                                          message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (action) in
                 
-                self.AwareData = json["data"].arrayValue
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            }))
+            self.present(alert, animated:true , completion: nil)
+        } else {
+            if let studyURL = study.getURL() {
+                study.join(withURL: studyURL) { (settings, status, error) in
+                    DispatchQueue.main.async {
+                        manager.addSensors(with: study)
+                        manager.add(AWAREEventLogger.shared())
+                        manager.add(AWAREStatusMonitor.shared())
+                        manager.createDBTablesOnAwareServer()
+                        manager.startAllSensors()
+                        self.showReloadCompletionAlert()
+                    }
                 }
-                
-                
             }
+        }
+        
+        for sensor in self.sensors {
+            sensor.syncProgress = 0
+            sensor.syncStatus = .unknown
+            
+            
+            
+            
+            
             
         }
+        
+        
+        
         
         
     }
@@ -233,6 +287,8 @@ class ViewController: UIViewController {
                          details: "",
                          identifier: TableRowIdentifier.advancedSettings.rawValue)]
     }
+    
+    
     
     lazy var sensors: [TableRowContent] = {
         let bundleUrl = Bundle.main.url(forResource: "AWAREFramework", withExtension: "bundle")
