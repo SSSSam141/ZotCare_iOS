@@ -12,7 +12,7 @@
         <!--Setting-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="aware_client_ios_v2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TargetView" id="BYZ-38-t0r" customClass="ViewController" customModule="aware_client_ios_v2" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,6 +130,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2012" y="-183"/>
+        </scene>
+        <!--LogOut-->
+        <scene sceneID="vd8-n1-AAO">
+            <objects>
+                <viewController id="ax7-u0-nwx" userLabel="LogOut" customClass="LogoutController" customModule="aware_client_ios_v2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kfe-Ta-VpD">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="You have successfully logged out." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nwI-HC-bXR">
+                                <rect key="frame" x="93" y="274" width="243" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Please exit the app and  log in again." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q63-sf-7Bg">
+                                <rect key="frame" x="85" y="349" width="258" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CgU-fo-dKd">
+                                <rect key="frame" x="166" y="446" width="97" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="LogOut:" destination="Sue-wz-ojL" eventType="touchUpInside" id="ykt-jb-aG4"/>
+                                    <segue destination="Kf4-Yd-Q7c" kind="presentation" modalPresentationStyle="fullScreen" id="ipd-pd-1OL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="N8S-nG-Vxy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="LogOut" image="arrowshape.turn.up.backward.2.fill" catalog="system" id="NqJ-Rf-XJ9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mRx-7f-I5b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Sue-wz-ojL" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1071.0280373831774" y="-820.30237580993526"/>
         </scene>
         <!--Sensor Setting View Controller-->
         <scene sceneID="hl4-i0-884">
@@ -349,7 +389,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="402-4h-Jg0">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="eBA-Rs-1lV" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="FirstView" automaticallyAdjustsScrollViewInsets="NO" id="eBA-Rs-1lV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="jMx-7a-0nf"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XQv-9x-Leg">
@@ -361,6 +401,7 @@
                         <segue destination="C4k-NR-3bT" kind="relationship" relationship="viewControllers" id="fIe-Rc-Tmx"/>
                         <segue destination="rgN-iV-Ty0" kind="relationship" relationship="viewControllers" id="x4w-u8-U1I"/>
                         <segue destination="j4I-hF-7Mw" kind="relationship" relationship="viewControllers" id="58I-Zb-MW7"/>
+                        <segue destination="ax7-u0-nwx" kind="relationship" relationship="viewControllers" id="AHA-Yw-uj5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFh-60-N8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -370,7 +411,7 @@
         <!--Login-->
         <scene sceneID="o4N-00-VpM">
             <objects>
-                <viewController title="Login" id="Kf4-Yd-Q7c" customClass="LoginController" customModule="aware_client_ios_v2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" title="Login" id="Kf4-Yd-Q7c" customClass="LoginController" customModule="aware_client_ios_v2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EXc-n4-sdg">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -532,7 +573,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25m-QW-8NH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1234" y="133"/>
+            <point key="canvasLocation" x="-1235.0467289719625" y="132.82937365010801"/>
         </scene>
         <!--Location Permission View Controller-->
         <scene sceneID="wip-rb-mey">
@@ -657,7 +698,7 @@
                                                             <constraint firstAttribute="height" constant="10" id="9cy-XB-GjT"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chose &quot;Always&quot; from the options " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fm-Eq-Z1o">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chose &quot;Always&quot; from the options " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fm-Eq-Z1o" userLabel="Chose &quot;Always&quot; from the options">
                                                         <rect key="frame" x="0.0" y="195" width="349.33333333333331" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="mbB-PZ-TJ4"/>
@@ -829,6 +870,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.backward.2.fill" catalog="system" width="128" height="86"/>
         <image name="aware" width="1906" height="796"/>
         <image name="line_chart" width="30" height="30"/>
         <image name="location_always_menu" width="732.66668701171875" height="82.666664123535156"/>

@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var AwareData:Array<JSON>=[]
     
+
+
+    
     let sensorManager = AWARESensorManager.shared()
     
     var refreshTimer:Timer?
@@ -31,80 +34,38 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        let user = UserDefaults.standard
         
-        let user_id = user.string(forKey: "id")
-
-        let user_token = user.string(forKey: "token")
         
-//        for sensor in self.sensors{
-//            let data_title = sensor.identifier
-//            let data_detail = JSON(sensorManager.getLatestSensorData(sensor.identifier))
-//            print(data_title)
-//            print(data_detail)
-//        //print(sensor)
+   
+//        sensorManager.startAllSensors()
+//        sensorManager.setSensorEventHandlerToAllSensors{
+//            (sensor,data) in
+//            if let data = data {
+//                print(sensor.getName()!,data)
+//                let data_title = sensor.getName()
+//                let data_detail = data
+        
+//                AwareDataProvider.request(.data(id:user_id!,token: user_token!, title: data_title!, data: data_detail)){ result in
+//                                     if case .success(let response) = result {
+//                                        // 解析数据
+//                                         let jsonDic = try! response.mapJSON()
+//                                         print(jsonDic)
 //
-////            AwareDataProvider.request(.data(id:user_id!,token: user_token!, title: data_title, data: data_details)){ result in
-////                     if case .success(let response) = result {
-////                        // 解析数据
-////                         let jsonDic = try! response.mapJSON()
-////                         print(jsonDic)
-////
-////                 }
-////
-////            }
+//                                 }
+//
+//                            }
+//
+//
+//            }
 //        }
         
         
-    }
-    func SensordataUpload(){
-        let study = AWAREStudy.shared()
-        let manager = AWARESensorManager.shared()
-        
-        manager.stopAndRemoveAllSensors()
-        if study.getURL() == "" {
-            manager.addSensors(with: study)
-            manager.add(AWAREEventLogger.shared())
-            manager.add(AWAREStatusMonitor.shared())
-            manager.createDBTablesOnAwareServer()
-            manager.startAllSensors()
-            let alert = UIAlertController(title: NSLocalizedString("setting_view_config_refresh_title", comment: ""),
-                                          message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { (action) in
-                
-            }))
-            self.present(alert, animated:true , completion: nil)
-        } else {
-            if let studyURL = study.getURL() {
-                study.join(withURL: studyURL) { (settings, status, error) in
-                    DispatchQueue.main.async {
-                        manager.addSensors(with: study)
-                        manager.add(AWAREEventLogger.shared())
-                        manager.add(AWAREStatusMonitor.shared())
-                        manager.createDBTablesOnAwareServer()
-                        manager.startAllSensors()
-                        self.showReloadCompletionAlert()
-                    }
-                }
-            }
-        }
-        
-        for sensor in self.sensors {
-            sensor.syncProgress = 0
-            sensor.syncStatus = .unknown
-            
-            
-            
-            
-            
-            
-        }
-        
-        
-        
-        
+
         
     }
+    
+  
+  
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -200,6 +161,9 @@ class ViewController: UIViewController {
         }
     }
     
+
+    
+    
     /// This method will be called when move to another UIViewController by segue.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -209,7 +173,10 @@ class ViewController: UIViewController {
         }
     
     }
-
+    
+    
+    
+ 
     
     @IBAction func didPushUploadButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: NSLocalizedString("setting_view_manual_upload_title", comment: ""),
@@ -526,9 +493,47 @@ extension ViewController: UITableViewDataSource {
 
             if (sensorManager.isExist(sensor.identifier)){
                 cell.icon.tintColor = .systemBlue
+                
+                let raw_sensor_data = sensorManager.getLatestSensorData(sensor.identifier)
+                if let raw = raw_sensor_data {
+                    if raw.isEmpty == false{
+                        let user = UserDefaults.standard
+                        let user_id = user.string(forKey: "id")
+                        let user_token = user.string(forKey: "token")
+                        let data_title = sensor.identifier
+                        var data_detail =  [String:Any]()
+                        if data_title=="plugin_ambient_noise"{
+                            var modi = raw
+                            modi["is_silent"]=0
+                            data_detail = modi as! [String:Any]
+                            data_detail["Title"]=data_title
+                            
+                        }else{
+                            data_detail = raw as! [String:Any]
+                            data_detail["Title"]=data_title
+                            
+                        }
+                        //print(data_detail)
+                        
+                        //print(ra_data)
+                        AwareDataProvider.request(.data(id:user_id!,token: user_token!, title: data_title, data:data_detail )){ result in
+                                             if case .success(let response) = result {
+                                                // 解析数据
+                                                 let jsonDic = try! response.mapJSON()
+                                              
+                                                 print(jsonDic)
+                                                print(data_detail)
+
+                                         }
+
+                                    }
+                    }
+                }
                 let latestData = sensorManager.getLatestSensorValue(sensor.identifier)
                 if let data = latestData {
                     cell.detail.text = data
+                    
+                    
                 }
                 cell.progress.progress = sensor.syncProgress
 

@@ -15,6 +15,7 @@ class QRCodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjec
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var joinButton: UIButton!
+
     
     var previewLayer:AVCaptureVideoPreviewLayer?
     var qrcodeFrameView:UIView?

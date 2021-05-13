@@ -8,12 +8,12 @@
 
 import Foundation
 import Moya
-
+import SwiftyJSON
 let AwareDataProvider = MoyaProvider<AwareData>()
 
 public enum AwareData{
     case name(name:String)
-    case data(id:String, token:String,title:String,data:String)
+    case data(id:String, token:String,title:String,data:[String:Any])
     case loginUser(usrname:String,password:String)
     case regUser(usrname:String,password:String)
 }
@@ -46,7 +46,9 @@ extension AwareData:TargetType{
         case let .regUser(usrname, pw):
             return .requestParameters(parameters: ["email":usrname,"password":pw],encoding: JSONEncoding.default)
         case let .data(id,token,title,data):
-            return .requestParameters(parameters: ["id":id,"token":token,"Title":title,"data":data],encoding: JSONEncoding.default)
+            
+            return .requestParameters(parameters: data, encoding: JSONEncoding.default)
+                
         
         default:
             return .requestPlain

@@ -21,8 +21,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var login_btn: UIButton!
     
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
       
         
     }
@@ -34,7 +37,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     override func viewDidAppear(_ animated: Bool) {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
 
+  
 
     }
    
@@ -97,6 +102,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
                    
                     user.set(id.string, forKey: "id")
                     user.set(token.string, forKey: "token")
+                 
                     
                     
                     if response.statusCode == 404{
@@ -121,7 +127,21 @@ class LoginController: UIViewController, UITextFieldDelegate {
                         
                     }else{
                        
-                        self.performSegue(withIdentifier: "login_success", sender: self)
+                       // self.performSegue(withIdentifier: "login_success", sender: self)
+                        let appDel:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+                        let centerVC = mainStoryBoard.instantiateViewController(withIdentifier: "FirstView") as! UITabBarController
+
+                             // setting the login status to true
+                             
+                        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+                        UserDefaults.standard.synchronize()
+                        appDel.window!.rootViewController = centerVC
+                        appDel.window!.makeKeyAndVisible()
+
+                        
+                        
                     }
                  
              }

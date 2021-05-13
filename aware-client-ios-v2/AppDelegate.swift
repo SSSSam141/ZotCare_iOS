@@ -14,13 +14,18 @@ import AWAREFramework
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
+        
+       
         let core    = AWARECore.shared()
         let manager = AWARESensorManager.shared()
         let study   = AWAREStudy.shared()
+        
+        
+        
         
 
         manager.addSensors(with: study)
@@ -54,6 +59,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AWAREEventLogger.shared().logEvent(["class":"AppDelegate",
                                             "event":"application:didFinishLaunchingWithOptions:launchOptions:"]);
+        let userLoginStatus = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+
+            if(userLoginStatus)
+            {
+                let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let centerVC = mainStoryBoard.instantiateViewController(withIdentifier: "FirstView") as! UITabBarController
+                window!.rootViewController = centerVC
+                window!.makeKeyAndVisible()
+            }
         
         return true
     }
